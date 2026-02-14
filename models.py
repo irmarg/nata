@@ -1,0 +1,24 @@
+from dataclasses import dataclass
+from datetime import datetime
+
+
+@dataclass
+class Entry:
+    ts: datetime
+    food: str
+    sugar_g: float
+    water_litre: float
+    insulin_units: float
+    time_eaten: datetime | None = None
+    adjusted_sugar_g: float = 0.0
+
+    def as_row(self):
+        return (
+            self.ts.isoformat(),
+            self.food,
+            self.sugar_g,
+            self.water_litre,
+            self.insulin_units,
+            self.time_eaten.isoformat() if self.time_eaten else None,
+            self.adjusted_sugar_g,
+        )
